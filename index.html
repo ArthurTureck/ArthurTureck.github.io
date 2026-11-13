@@ -13,10 +13,13 @@
   <meta property="og:url" content="https://arthurtureck.dev.br/">
   <meta property="og:type" content="website">
   <meta property="og:image" content="https://arthurtureck.dev.br/assets/img/painel-visao-geral.webp">
+  <script>document.documentElement.classList.add("js")</script>
   <link rel="stylesheet" href="style.css">
+  <script src="script.js" defer></script>
 </head>
 <body>
   <a class="pular" href="#conteudo">Pular para o conteúdo</a>
+  <div class="progresso" aria-hidden="true"><span></span></div>
 
   <header class="topo">
     <div class="largura topo-linha">
@@ -36,7 +39,7 @@
   <main id="conteudo">
     <section class="hero" id="inicio">
       <div class="largura hero-grade">
-        <div>
+        <div class="hero-texto">
           <p class="sobretitulo">Automação e dados para Segurança do Trabalho</p>
           <h1>Transformo rotina manual em ferramenta que a equipe usa <span class="destaque">sozinha</span>.</h1>
           <p class="lead">Trabalho na Segurança do Trabalho de uma distribuidora de GLP em Cascavel (PR). Meço quanto tempo cada tarefa leva, construo a ferramenta e registro o antes e o depois.</p>
@@ -46,20 +49,21 @@
           </div>
         </div>
         <ul class="numeros" aria-label="Impacto em números">
-          <li><strong>~40 h</strong><span>por ano devolvidas ao setor</span></li>
-          <li><strong>−88%</strong><span>no tempo de cada relatório mensal (25 → 3 min)</span></li>
-          <li><strong>3</strong><span>relatórios da rotina automatizados</span></li>
+          <li data-revelar><strong>~<span data-contar="40">40</span> h</strong><span>por ano devolvidas ao setor</span></li>
+          <li data-revelar><strong>−<span data-contar="88">88</span>%</strong><span>no tempo de cada relatório mensal (25 → 3 min)</span></li>
+          <li data-revelar><strong><span data-contar="3">3</span></strong><span>relatórios da rotina automatizados</span></li>
         </ul>
       </div>
+      <a class="rolar" href="#projetos" aria-label="Ir para os projetos"><span></span></a>
     </section>
 
     <section class="secao" id="projetos" aria-labelledby="t-projetos">
       <div class="largura">
-        <p class="sobretitulo">Projetos</p>
-        <h2 id="t-projetos">O que já está rodando</h2>
-        <p class="secao-lead">Cada projeto nasceu de uma tarefa real da rotina. As imagens e os testes usam dados fictícios.</p>
+        <p class="sobretitulo" data-revelar>Projetos</p>
+        <h2 id="t-projetos" data-revelar>O que já está rodando</h2>
+        <p class="secao-lead" data-revelar>Cada projeto nasceu de uma tarefa real da rotina. As imagens e os testes usam dados fictícios.</p>
 
-        <article class="projeto projeto-destaque">
+        <article class="projeto projeto-destaque" data-revelar>
           <figure class="projeto-img">
             <img src="assets/img/painel-visao-geral.webp" alt="Painel do Relatório Mensal SSO com gráficos do ano, usando dados fictícios" width="1200" height="806" loading="lazy">
           </figure>
@@ -67,11 +71,11 @@
             <p class="etiqueta">Projeto principal</p>
             <h3>Relatório Mensal SSO</h3>
             <p>Monta os relatórios do mês de Permissões de Trabalho, DDS, Quase Acidentes e Melhorias de Segurança, e mostra um painel que lê as pastas da rede e se atualiza sozinho. É um único arquivo HTML: abre com dois cliques e nenhum documento sai do computador.</p>
-            <dl class="antes-depois">
-              <div><dt>Antes</dt><dd>~25 min por relatório</dd></div>
-              <div><dt>Agora</dt><dd>~3 min</dd></div>
-              <div><dt>Ganho</dt><dd>~24 h por ano</dd></div>
-            </dl>
+            <div class="barras" role="img" aria-label="Tempo por relatório: antes 25 minutos, agora 3 minutos">
+              <div class="barra"><span class="rotulo">Antes</span><span class="trilho"><span class="enchimento antes" style="--v:1"></span></span><span class="valor">25 min</span></div>
+              <div class="barra"><span class="rotulo">Agora</span><span class="trilho"><span class="enchimento agora" style="--v:.12"></span></span><span class="valor">3 min</span></div>
+            </div>
+            <p class="ganho">Cerca de 24 horas por ano devolvidas à equipe</p>
             <ul class="tags" aria-label="Tecnologias">
               <li>JavaScript</li><li>pdf-lib</li><li>pdf.js</li><li>Tesseract.js (OCR)</li><li>Playwright</li>
             </ul>
@@ -80,20 +84,20 @@
         </article>
 
         <div class="galeria">
-          <figure>
+          <figure data-revelar>
             <img src="assets/img/ferramenta-juntar.webp" alt="Ferramenta Juntar e classificar, com dados fictícios" width="1200" height="806" loading="lazy">
             <figcaption>Juntar e classificar: junta a 1ª página de cada PDF do mês e confere a numeração.</figcaption>
           </figure>
-          <figure>
+          <figure data-revelar>
             <img src="assets/img/painel-quase-acidentes.webp" alt="Painel de Quase Acidentes por mês e gravidade, com dados fictícios" width="1200" height="806" loading="lazy">
             <figcaption>Painel de Quase Acidentes: por mês, dia da semana, gravidade e local.</figcaption>
           </figure>
         </div>
 
-        <h3 class="subtitulo-cartoes">Outros projetos</h3>
+        <h3 class="subtitulo-cartoes" data-revelar>Outros projetos</h3>
 
         <div class="cartoes">
-          <article class="cartao">
+          <article class="cartao" data-revelar>
             <div class="cartao-corpo">
               <p class="etiqueta">Módulo do Relatório SSO</p>
               <h3>Relatório semanal de DDS</h3>
@@ -103,7 +107,7 @@
             </div>
           </article>
 
-          <article class="cartao">
+          <article class="cartao" data-revelar>
             <div class="cartao-corpo">
               <p class="etiqueta">Módulo do Relatório SSO</p>
               <h3>Painel de indicadores (IPS)</h3>
@@ -113,7 +117,7 @@
             </div>
           </article>
 
-          <article class="cartao">
+          <article class="cartao" data-revelar>
             <div class="cartao-corpo">
               <p class="etiqueta">Python</p>
               <h3>Treinamentos NR e Juntar PTs</h3>
@@ -123,7 +127,7 @@
             </div>
           </article>
 
-          <article class="cartao">
+          <article class="cartao" data-revelar>
             <div class="cartao-corpo">
               <p class="etiqueta">Projeto de curso · ESPRO</p>
               <h3>Pet Coffee · Central da Turma</h3>
@@ -138,26 +142,26 @@
 
     <section class="secao secao-alt" id="como" aria-labelledby="t-como">
       <div class="largura">
-        <p class="sobretitulo">Método</p>
-        <h2 id="t-como">Como eu trabalho</h2>
+        <p class="sobretitulo" data-revelar>Método</p>
+        <h2 id="t-como" data-revelar>Como eu trabalho</h2>
         <ol class="passos">
-          <li><span>1</span><h3>Medir</h3><p>Antes de programar: quanto tempo a tarefa leva hoje e quantas vezes por mês acontece?</p></li>
-          <li><span>2</span><h3>Construir</h3><p>Testando os casos que costumam quebrar: arquivo corrompido, nome fora do padrão, papel escaneado de lado.</p></li>
-          <li><span>3</span><h3>Entregar</h3><p>Algo que a pessoa abre com dois cliques e usa sem precisar de mim.</p></li>
-          <li><span>4</span><h3>Registrar</h3><p>O antes e o depois em números, sempre pelo lado conservador.</p></li>
+          <li data-revelar><span>1</span><h3>Medir</h3><p>Antes de programar: quanto tempo a tarefa leva hoje e quantas vezes por mês acontece?</p></li>
+          <li data-revelar><span>2</span><h3>Construir</h3><p>Testando os casos que costumam quebrar: arquivo corrompido, nome fora do padrão, papel escaneado de lado.</p></li>
+          <li data-revelar><span>3</span><h3>Entregar</h3><p>Algo que a pessoa abre com dois cliques e usa sem precisar de mim.</p></li>
+          <li data-revelar><span>4</span><h3>Registrar</h3><p>O antes e o depois em números, sempre pelo lado conservador.</p></li>
         </ol>
       </div>
     </section>
 
     <section class="secao" id="sobre" aria-labelledby="t-sobre">
       <div class="largura sobre-grade">
-        <div>
-          <p class="sobretitulo">Sobre</p>
-          <h2 id="t-sobre">Quem sou</h2>
+        <div class="sobre-texto" data-revelar>
+          <p class="sobretitulo" data-revelar>Sobre</p>
+          <h2 id="t-sobre" data-revelar>Quem sou</h2>
           <p>Sou o Arthur, Jovem Aprendiz na Segurança do Trabalho da Copa Energia, no Centro Operativo de Cascavel (PR). Percebi que boa parte do dia ia em relatório montado à mão e em planilha difícil de manter, e comecei a resolver isso com programação.</p>
           <p>Hoje a técnica de segurança usa as ferramentas que construí no dia a dia, e o trabalho foi apresentado à gerência do Centro Operativo. Cursei dois semestres de Engenharia de Software e quero seguir na área de automação e dados.</p>
         </div>
-        <div class="ferramentas">
+        <div class="ferramentas" data-revelar>
           <h3>Ferramentas</h3>
           <ul class="tags tags-grandes">
             <li>Python</li><li>pandas</li><li>openpyxl</li><li>JavaScript</li><li>HTML e CSS</li><li>OCR (Tesseract)</li><li>Playwright</li><li>Git</li><li>Excel</li>
@@ -167,7 +171,7 @@
     </section>
 
     <section class="contato" id="contato" aria-labelledby="t-contato">
-      <div class="largura contato-caixa">
+      <div class="largura contato-caixa" data-revelar>
         <h2 id="t-contato">Bora conversar?</h2>
         <p>Se você tem uma rotina que toma horas da equipe, eu quero ouvir.</p>
         <div class="acoes">
@@ -186,6 +190,5 @@
       <p>© <span id="ano">2026</span> Arthur Tureck</p>
     </div>
   </footer>
-  <script>document.getElementById('ano').textContent = new Date().getFullYear();</script>
 </body>
 </html>
