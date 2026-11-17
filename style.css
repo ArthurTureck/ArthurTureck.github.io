@@ -426,3 +426,7 @@ nav .botao { color: #1A1206; }
 /* Retorno ao passar o mouse que não depende de movimento (vale também para "reduzir movimento") */
 .pilha:hover .pilha-selo, .pilha:focus-visible .pilha-selo { background: #F59C47; box-shadow: 0 0 0 4px rgba(240,137,43,.25), 0 10px 24px -6px rgba(240,137,43,.6); }
 .pilha:hover .f2, .pilha:focus-visible .f2 { border-color: rgba(92,200,160,.55); }
+/* Quem pede transparência reduzida (Windows: "Efeitos de transparência" desligado) vê o topo sólido */
+@media (prefers-reduced-transparency: reduce) {
+  .topo.rolado, html:not(.js) .topo { background: var(--hero-1); backdrop-filter: none; }
+}
