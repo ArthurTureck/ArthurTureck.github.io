@@ -189,6 +189,7 @@ nav .botao { color: #1A1206; }
 .tags-grandes li { font-size: .92rem; padding: 6px 14px; }
 .link-seta { font-weight: 700; color: var(--laranja); text-decoration: none; }
 .link-seta::after { content: " →"; }
+.links-projeto { display: flex; flex-wrap: wrap; gap: 8px 22px; }
 .link-seta:hover { text-decoration: underline; }
 
 /* Cartões */
