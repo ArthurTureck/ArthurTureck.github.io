@@ -72,16 +72,46 @@
       numeros.forEach((el) => obsN.observe(el));
     }
 
-    /* 4. Pilha de telas do hero inclina um pouco seguindo o mouse */
+    /* 4. Pilha de telas: gira como um objeto só, seguindo o mouse em todo o hero.
+       Cada quadro chega 10% mais perto do alvo (suavização), e o laço só roda enquanto há movimento. */
     const pilha = document.querySelector('.pilha');
-    if (pilha && !semMovimento && window.matchMedia('(pointer: fine)').matches) {
-      pilha.addEventListener('pointermove', (e) => {
+    if (pilha && hero && !semMovimento && window.matchMedia('(pointer: fine) and (min-width: 861px)').matches) {
+      const MAX_X = 10, MAX_Y = 16;
+      const alvo = { rx: 0, ry: 0, abre: 0, gx: 50, gy: 30 };
+      const atual = { ...alvo };
+      let rodando = false;
+      const passo = () => {
+        let parado = true;
+        for (const k in alvo) {
+          const d = alvo[k] - atual[k];
+          atual[k] += d * (k === 'abre' ? 0.12 : 0.1);
+          if (Math.abs(d) > 0.01) parado = false;
+        }
+        pilha.style.setProperty('--rx', atual.rx.toFixed(3));
+        pilha.style.setProperty('--ry', atual.ry.toFixed(3));
+        pilha.style.setProperty('--abre', atual.abre.toFixed(3));
+        pilha.style.setProperty('--gx', `${atual.gx.toFixed(1)}%`);
+        pilha.style.setProperty('--gy', `${atual.gy.toFixed(1)}%`);
+        if (parado) { rodando = false; return; }
+        requestAnimationFrame(passo);
+      };
+      const mexer = () => { if (!rodando) { rodando = true; requestAnimationFrame(passo); } };
+      hero.addEventListener('pointermove', (e) => {
         const r = pilha.getBoundingClientRect();
-        const x = (e.clientX - r.left) / r.width - 0.5, y = (e.clientY - r.top) / r.height - 0.5;
-        pilha.style.setProperty('--ry', `${(x * 10).toFixed(2)}deg`);
-        pilha.style.setProperty('--rx', `${(-y * 8).toFixed(2)}deg`);
+        // posição relativa ao centro da pilha, limitada a -1..1 (funciona em qualquer ponto do hero)
+        const nx = Math.max(-1, Math.min(1, (e.clientX - (r.left + r.width / 2)) / (r.width * 0.75)));
+        const ny = Math.max(-1, Math.min(1, (e.clientY - (r.top + r.height / 2)) / (r.height * 0.75)));
+        alvo.ry = nx * MAX_Y;
+        alvo.rx = -ny * MAX_X;
+        alvo.gx = 50 + nx * 45;
+        alvo.gy = 40 + ny * 45;
+        mexer();
       });
-      pilha.addEventListener('pointerleave', () => { pilha.style.setProperty('--ry', '0deg'); pilha.style.setProperty('--rx', '0deg'); });
+      hero.addEventListener('pointerleave', () => { alvo.rx = 0; alvo.ry = 0; alvo.gx = 50; alvo.gy = 30; mexer(); });
+      pilha.addEventListener('pointerenter', () => { alvo.abre = 1; mexer(); });
+      pilha.addEventListener('pointerleave', () => { alvo.abre = 0; mexer(); });
+      pilha.addEventListener('focus', () => { alvo.abre = 1; mexer(); });
+      pilha.addEventListener('blur', () => { alvo.abre = 0; mexer(); });
     }
 
     /* 5. Menu marca a seção em que a pessoa está */
