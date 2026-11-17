@@ -194,6 +194,7 @@ nav .botao { color: #1A1206; }
 /* Cartões */
 .cartoes { display: grid; grid-template-columns: repeat(2, 1fr); gap: 22px; }
 @media (max-width: 640px) { .cartoes { grid-template-columns: 1fr; } }
+.cartao-largo { grid-column: 1 / -1; }
 .cartao {
   background: var(--cartao); border: 1px solid var(--borda); border-radius: var(--raio);
   overflow: hidden; box-shadow: var(--sombra); display: flex; flex-direction: column;
