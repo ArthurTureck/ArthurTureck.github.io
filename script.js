@@ -72,7 +72,19 @@
       numeros.forEach((el) => obsN.observe(el));
     }
 
-    /* 4. Menu marca a seção em que a pessoa está */
+    /* 4. Pilha de telas do hero inclina um pouco seguindo o mouse */
+    const pilha = document.querySelector('.pilha');
+    if (pilha && !semMovimento && window.matchMedia('(pointer: fine)').matches) {
+      pilha.addEventListener('pointermove', (e) => {
+        const r = pilha.getBoundingClientRect();
+        const x = (e.clientX - r.left) / r.width - 0.5, y = (e.clientY - r.top) / r.height - 0.5;
+        pilha.style.setProperty('--ry', `${(x * 10).toFixed(2)}deg`);
+        pilha.style.setProperty('--rx', `${(-y * 8).toFixed(2)}deg`);
+      });
+      pilha.addEventListener('pointerleave', () => { pilha.style.setProperty('--ry', '0deg'); pilha.style.setProperty('--rx', '0deg'); });
+    }
+
+    /* 5. Menu marca a seção em que a pessoa está */
     const links = [...document.querySelectorAll('nav a[href^="#"]')];
     const secoes = links.map((a) => document.querySelector(a.getAttribute('href'))).filter(Boolean);
     if ('IntersectionObserver' in window && secoes.length) {
